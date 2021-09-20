@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../phtest"
+		},
+		{
+			"path": "../Beginnings"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Beginnings"
+	}
+}
