@@ -57,6 +57,7 @@ export class Beach {
     // Start timer tics    
     this.now = 0
     this.ticking = true
+    this.step = false
     setTimeout(() => {this.tic()}, 20)
   }
 
@@ -65,24 +66,25 @@ export class Beach {
     // var code = event.code;
     if (event.key === ' ') {
       this.ticking = !this.ticking
+    } else if (event.key === 's') {
+      this.step = true
     }
 
     gTurtles.forEach((t) => {t.keyDown(event)})
   }
 
   tic() {
-    if (this.ticking || this.needsUpdate) {
+    if (this.ticking || this.step || this.needsUpdate) {
 
-      if (this.ticking) {
+      if (this.ticking || this.step) {
         this.now += 1
       }
       let tics = this.now
-      // Clear the existing Canvas
-      this.ctx.clearRect(-this.xc, 0, this.canvas.width * 2, this.canvas.height* 2);
       gTurtles.forEach(function(t) {t.timer(tics)})
       this.refresh()
     }
     this.needsUpdate = false
+    this.step = false
 
     setTimeout(() => {this.tic()}, 20)
   }

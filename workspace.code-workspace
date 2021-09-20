@@ -4,10 +4,10 @@
 			"path": "../phtest"
 		},
 		{
-			"path": "../Beginnings"
+			"path": "."
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Beginnings"
+		"liveServer.settings.multiRootWorkspaceName": "turtle-beach"
 	}
 }

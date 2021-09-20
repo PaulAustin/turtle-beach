@@ -12,7 +12,7 @@ class Grid extends Turtle {
     this.colorIndex = 0
     this.colors = [
       ["grey", "lightGrey", "white"],
-      ["grey", "lightGrey", "black"],
+      ["grey", "lightGrey","rgba(255, 255, 255, 0.1)"],
       ["green", "darkgreen", "black"],
     ]
   }
