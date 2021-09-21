@@ -3,8 +3,12 @@ import { Turtle, Beach } from './modules/turtle.mjs';
 import { drawGrid } from './modules/shapes.mjs';
 import { TImage } from './modules/turtle.mjs';
 
-
 var b = new Beach()
+
+b.onMouseDown = function(x, y) {
+  console.log('mouse', x, y)
+  ship.setOrigin(x, y)
+}
 
 class Grid extends Turtle {
   constructor () {

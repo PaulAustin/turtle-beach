@@ -54,6 +54,9 @@ export class Beach {
     // Catch key events
     window.addEventListener('keydown', (event) => {this.keyDown(event)}, false);
 
+    // Mouse events go to the beach. 
+    this.canvas.addEventListener('click', (event) => {this._mouseDown(event)}, false);
+
     // Start timer tics    
     this.now = 0
     this.ticking = true
@@ -71,6 +74,16 @@ export class Beach {
     }
 
     gTurtles.forEach((t) => {t.keyDown(event)})
+  }
+
+
+  _mouseDown(event) {
+    if (typeof this.onMouseDown == 'function') {
+      // Fix the edges 
+      let x = this.mapX(event.clientX) - 7
+      let y = this.mapY(event.clientY) + 9
+      this.onMouseDown(x, y, true)
+    }
   }
 
   tic() {
@@ -123,7 +136,7 @@ export class Beach {
   }
 
   mapX(x) {
-    return x
+    return x - this.xc
   }
 
   line(x0, y0, x1, y1) {
@@ -142,7 +155,6 @@ export class Beach {
 
   stamp(x, y, image) {
     if (image.loaded) {
-      console.log("draw image")
       let di = image.domImage
       let w = di.width
       let h = di.height
@@ -164,6 +176,15 @@ export class Beach {
 
 export class Turtle {
   constructor() {
+    // The origin - All Turtle drawing is relative to its origin
+    // a Turtle Image can be moved on the beach by changing the 
+    // the origin. 
+    this.ox = 0
+    this.oy = 0
+
+    // All turtles have their own sense of time.
+    this.tics = 0
+
     this.reset()
     gTurtles.push(this)
     this.cc = gTCC
@@ -265,6 +286,19 @@ export class Turtle {
     return this.angleInRadians * 180.0 / Math.PI
   }
 
+  mox(x) {
+    return x + this.ox
+  }
+
+  moy(y) {
+    return y + this.oy
+  }
+
+  setOrigin(x, y) {
+    this.ox = x
+    this.oy = y
+  }
+
   moveTo (x, y) {
     this.x = x
     this.y = y
@@ -274,7 +308,7 @@ export class Turtle {
     // If if can draw the last two segments it can have
     // joint  if width > 1 ???
     this.setCtxStroke()
-    this.cc.line(this.x, this.y, x, y)
+    this.cc.line(this.mox(this.x), this.moy(this.y), this.mox(x), this.moy(y))
     this.x = x
     this.y = y
   }
@@ -282,11 +316,11 @@ export class Turtle {
   circle(radius) {
     // Draw a circle center where the turtle is 
     this.setCtxStroke()
-    this.cc.circle(this.x, this.y)
+    this.cc.circle(this.mox(this.x), this.moy(this.y))
   }
 
   stamp(image) {
-    this.cc.stamp(this.x, this.y, image)
+    this.cc.stamp(this.mox(this.x), this.moy(this.y), image)
   }
 
   forward(length) {
@@ -320,19 +354,11 @@ export class Turtle {
   text(message) {
     this.cc.ctx.font = this.font
     this.cc.ctx.fillStyle = this.penColor
-    this.cc.text(this.x, this.y, message);
+    this.cc.text(this.mox(this.x), this.moy(this.y), message)
   }
 }
 
 /*
-// Resize the canvas to fill browser window dynamically
-canvas.addEventListener('click', onclick, false);
-function onclick(event) {
-  console.log(event)
-  if (typeof onMouseDown == 'function') { 
-    onMouseDown(event.clientX - turtle.xc - 7, turtle.my(event.clientY)+9, true)
-  }
-}
 
 canvas.addEventListener('mousemove', onclick, false);
 function onclick(event) {
