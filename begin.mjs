@@ -11,7 +11,7 @@ let music = new MusicPlayer()
 b.onMouseDown = function(x, y) {
   // console.log('mouse', x, y)
   ship.setOrigin(x, y)
-  music.playNote(440, 0.25)
+  music.playNote("C4", 0.25)
 }
 
 class Grid extends Turtle {
