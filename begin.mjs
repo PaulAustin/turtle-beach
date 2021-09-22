@@ -1,13 +1,17 @@
 
-import { Turtle, Beach } from './modules/turtle.mjs';
-import { drawGrid } from './modules/shapes.mjs';
-import { TImage } from './modules/turtle.mjs';
+import { Turtle, Beach, TImage } from './modules/turtle.mjs'
+import { drawGrid } from './modules/shapes.mjs'
+import { MusicPlayer } from './modules/music.mjs'
+
 
 var b = new Beach()
+let music = new MusicPlayer()
+
 
 b.onMouseDown = function(x, y) {
-  console.log('mouse', x, y)
+  // console.log('mouse', x, y)
   ship.setOrigin(x, y)
+  music.playNote(440, 0.25)
 }
 
 class Grid extends Turtle {
@@ -18,6 +22,7 @@ class Grid extends Turtle {
       ["grey", "lightGrey", "white"],
       ["grey", "lightGrey","rgba(255, 255, 255, 0.1)"],
       ["green", "darkgreen", "black"],
+      ["green", "darkgreen","rgba(0, 0, 0, 0.1)"],
     ]
   }
   
@@ -35,10 +40,14 @@ class Grid extends Turtle {
 
 class Ship extends Turtle {
   draw() {
+    let len = 100
     this.left((this.now() * 10) % 360)
+    this.backward(125)
+    this.right((this.now() * 10) % 360)
+    this.right(-60)
     // When draw starts 
     this.setPen("orange", 15)
-    drawHexagon(this, Math.sin(this.now() * 0.05)* 100)
+    drawHexagon(this, Math.sin(this.now() * 0.05)* len)
   }
 }
   
@@ -55,6 +64,7 @@ class Balloon extends Turtle {
   
 let grid = new Grid()
 let ship = new Ship()
+
 let bubble = new TImage("./images/bubble.png")
 
 //let b1 = new Balloon()
