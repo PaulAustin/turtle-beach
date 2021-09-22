@@ -40,14 +40,14 @@ class Grid extends Turtle {
 
 class Ship extends Turtle {
   draw() {
-    let len = 100
-    this.left((this.now() * 10) % 360)
-    this.backward(125)
-    this.right((this.now() * 10) % 360)
-    this.right(-60)
+    let len = 50
+    //this.left((this.now() * 10) % 360)
+    //this.backward(125)
+    this.right((this.now() * 3) % 360)
+    //this.right(-60)
     // When draw starts 
     this.setPen("orange", 15)
-    drawHexagon(this, Math.sin(this.now() * 0.05)* len)
+    drawHexagon(this, (Math.sin(this.now() * 0.04) + 1.1) * len)
   }
 }
   
