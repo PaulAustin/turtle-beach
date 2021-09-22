@@ -113,7 +113,7 @@ export class Beach {
     c.height = window.innerHeight
     this.yc = c.height/2
     this.xc = c.width/2
-    this.refresh()
+    this.update()
   }
 
   refresh() {
