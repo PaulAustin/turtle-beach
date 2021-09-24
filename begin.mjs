@@ -2,6 +2,7 @@
 import { Turtle, Beach, TImage } from './modules/turtle.mjs'
 import { drawGrid } from './modules/shapes.mjs'
 import { MusicPlayer } from './modules/music.mjs'
+import { prelude } from './modules/songs.mjs'
 
 
 var b = new Beach()
@@ -11,7 +12,13 @@ let music = new MusicPlayer()
 b.onMouseDown = function(x, y) {
   // console.log('mouse', x, y)
   ship.setOrigin(x, y)
-  music.playNote("C4", 0.25)
+  // music.playNote("C:1")
+  // music.playNotes(['C:1', 'D:1', 'E:1', 'C:1', 'D:1', 'E:1'])
+  //music.playNotes(['r4:2', 'g', 'g', 'g', 'eb:8', 'r:2', 'f', 'f', 'f', 'd:8'])
+
+  music.playNotes(prelude)
+
+
 }
 
 class Grid extends Turtle {
