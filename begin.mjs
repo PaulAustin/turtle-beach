@@ -1,13 +1,17 @@
 
-import { Turtle, Beach, TImage } from './modules/turtle.mjs'
+import { Turtle, Beach} from './modules/turtle.mjs'
 import { drawGrid } from './modules/shapes.mjs'
 import { MusicPlayer } from './modules/music.mjs'
-import { prelude } from './modules/songs.mjs'
+import { prelude, twinkle } from './modules/songs.mjs'
+import { PixelMatrix, PixelFile } from './modules/pixels.mjs'
+import { spriteColors } from './modules/pixels.mjs'
 
 
 var b = new Beach()
 let music = new MusicPlayer()
-
+console.log("make a donot")
+let donut = new PixelMatrix(16, 16)
+console.log("make a donot", donut)
 
 b.onMouseDown = function(x, y) {
   // console.log('mouse', x, y)
@@ -17,8 +21,7 @@ b.onMouseDown = function(x, y) {
   //music.playNotes(['r4:2', 'g', 'g', 'g', 'eb:8', 'r:2', 'f', 'f', 'f', 'd:8'])
 
   music.playNotes(prelude)
-
-
+  // a short hack
 }
 
 class Grid extends Turtle {
@@ -72,10 +75,10 @@ class Balloon extends Turtle {
 let grid = new Grid()
 let ship = new Ship()
 
-let bubble = new TImage("./images/bubble.png")
+let bubble = new PixelFile("./images/bubble.png")
 
 //let b1 = new Balloon()
-  
+
   
 function drawTri(t, length) {
   t.push()
@@ -88,9 +91,10 @@ function drawTri(t, length) {
 }
   
 function drawHexagon(t, length) {
+  t.stamp(bubble)
   for (let i=1; i <= 6; i++) {
+    t.stamp(donut)
     t.forward(length)
-    t.stamp(bubble)
     t.left(60)   
   }
 }

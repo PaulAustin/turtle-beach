@@ -16,20 +16,6 @@ var gTCC = {}
 console.log('\x1b[30m');
 console.log('Welcome To JS-Turtle-Graphics - PFA 0.1')
 
-export class TImage {
-  constructor(path) {
-    this.loaded = false
-    let di = new Image()
-    di.onload = () => {this.onLoad()}
-    di.src = path
-    this.domImage = di
-  }
-
-  onLoad() {
-    this.loaded = true
-  }
-}
-
 export class Beach {
   constructor() {
 
@@ -80,7 +66,7 @@ export class Beach {
   _mouseDown(event) {
     if (typeof this.onMouseDown == 'function') {
       // Fix the edges 
-      let x = this.mapX(event.clientX) - 7
+      let x = this.invMapX(event.clientX) - 7
       let y = this.mapY(event.clientY) + 9
       this.onMouseDown(x, y, true)
     }
@@ -120,7 +106,7 @@ export class Beach {
     // Reset the context's treansform
     // For math grid, let translate to the shift
     this.ctx.resetTransform()
-    this.ctx.translate(this.xc, 0);
+    //this.ctx.translate(this.xc, 0);
     this.ctx.textAlign = "left";
     this.ctx.lineCap = "round";
 
@@ -136,13 +122,17 @@ export class Beach {
   }
 
   mapX(x) {
-    return x - this.xc
+    return x + this.xc
+  }
+
+  invMapX(x) {
+    return this.xc - x
   }
 
   line(x0, y0, x1, y1) {
     this.ctx.beginPath()
-    this.ctx.moveTo(x0, this.mapY(y0))
-    this.ctx.lineTo(x1, this.mapY(y1))
+    this.ctx.moveTo(this.mapX(x0), this.mapY(y0))
+    this.ctx.lineTo(this.mapX(x1), this.mapY(y1))
     this.ctx.stroke()
   }
 
@@ -154,20 +144,16 @@ export class Beach {
   }
 
   stamp(x, y, image) {
-    if (image.loaded) {
-      let di = image.domImage
-      let w = di.width
-      let h = di.height
-      // center the image??
-      this.ctx.drawImage(di, x - w/2, this.mapY(y) - h/2, di.width, di.height);
-    }
+    let ix = this.mapX(x)
+    let iy = this.mapY(y)
+    image.drawToContext(this.ctx, ix, iy)
   }
 
   text(x, y, message) {
     this.ctx.font = this.font
     this.ctx.fillStyle = this.penColor
     this.ctx.save();
-    this.ctx.translate(x, this.mapY(y));
+    this.ctx.translate(this.mapX(x), this.mapY(y));
 //    this.ct.rotate(this.angleInRadians);
     this.ctx.fillText(message, 0, 0);
     this.ctx.restore();
