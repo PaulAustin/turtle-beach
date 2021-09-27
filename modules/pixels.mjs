@@ -92,7 +92,19 @@ export class PixelMatrix {
   // make static factories on the class, create from size, Create from data, ( JPEG??)
   // This could merge with TImage
 
-  constructor(w, h) {
+  constructor(options) {
+
+    let w = options.w
+    let h = options.h
+    let data = options.data
+
+    if (typeof(data) ==='string') {
+      let slabs = data.replace(/ /g, '').split('\n')
+      // still need to remove emply lines, move to seperate function. 
+      // use with color table to put data into Canvas.
+      console.log('data passes', slabs.length, slabs)
+    }
+
     this.canvas = document.createElement('canvas')
     this.canvas.width = w
     this.canvas.height = h

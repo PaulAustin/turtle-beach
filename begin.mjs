@@ -5,12 +5,15 @@ import { MusicPlayer } from './modules/music.mjs'
 import { prelude, twinkle } from './modules/songs.mjs'
 import { PixelMatrix, PixelFile } from './modules/pixels.mjs'
 import { spriteColors } from './modules/pixels.mjs'
-
+import { sprite16 } from './images/sprites.mjs'
 
 var b = new Beach()
 let music = new MusicPlayer()
 console.log("make a donot")
-let donut = new PixelMatrix(16, 16)
+let donut = new PixelMatrix({w:16, h:16})
+let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
+
+
 console.log("make a donot", donut)
 
 b.onMouseDown = function(x, y) {
@@ -94,6 +97,7 @@ function drawHexagon(t, length) {
   t.stamp(bubble)
   for (let i=1; i <= 6; i++) {
     t.stamp(donut)
+    t.stamp(cherry)
     t.forward(length)
     t.left(60)   
   }
