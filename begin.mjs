@@ -13,7 +13,8 @@ console.log("make a donot")
 //let donut = new PixelMatrix({w:16, h:16})
 //let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
 let donut = new PixelFile("./images/mc/donut-32.bmp")
-let cherry = new PixelFile("./images/mc/cherry-16.bmp")
+//let cherry = new PixelFile("./images/mc/cherry-16.bmp")
+let cherry = new PixelFile("./images/svg/cherry0.svg")
 let bubble = new PixelFile("./images/bubble.png")
 
 
@@ -97,7 +98,7 @@ function drawHexagon(t, length) {
     t.up()
     t.stamp(donut, 6)
     t.forward(50)
-    t.stamp(cherry, 4)
+    t.stamp(cherry, 0.5)
     t.left(180)
     t.forward(50)
     t.left(180)
