@@ -143,10 +143,10 @@ export class Beach {
     this.ctx.stroke();
   }
 
-  stamp(x, y, image) {
+  stamp(x, y, image, scale) {
     let ix = this.mapX(x)
     let iy = this.mapY(y)
-    image.drawToContext(this.ctx, ix, iy)
+    image.drawToContext(this.ctx, ix, iy, scale)
   }
 
   text(x, y, message) {
@@ -305,8 +305,8 @@ export class Turtle {
     this.cc.circle(this.mox(this.x), this.moy(this.y))
   }
 
-  stamp(image) {
-    this.cc.stamp(this.mox(this.x), this.moy(this.y), image)
+  stamp(image, scale = 1.0) {
+    this.cc.stamp(this.mox(this.x), this.moy(this.y), image, scale)
   }
 
   up() {

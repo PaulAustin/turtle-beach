@@ -78,12 +78,14 @@ export class PixelFile {
     this.loaded = true
   }
 
-  drawToContext(ctx, x, y, w, h) {
+  drawToContext(ctx, x, y, scale) {
     if (this.loaded) {
       let di = this.domImage
-      let w = di.width
-      let h = di.height  
+      let w = di.width * scale
+      let h = di.height * scale
+      ctx.imageSmoothingEnabled = false
       ctx.drawImage(di, x - w/2, y - h/2, w, h);
+      ctx.imageSmoothingEnabled = true
     }
   }
 }

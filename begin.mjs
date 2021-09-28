@@ -95,9 +95,9 @@ function drawHexagon(t, length) {
   t.stamp(bubble)
   for (let i=1; i <= 6; i++) {
     t.up()
-    t.stamp(donut)
+    t.stamp(donut, 6)
     t.forward(50)
-    t.stamp(cherry)
+    t.stamp(cherry, 4)
     t.left(180)
     t.forward(50)
     t.left(180)
