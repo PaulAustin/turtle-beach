@@ -10,8 +10,11 @@ import { sprite16 } from './images/sprites.mjs'
 var b = new Beach()
 let music = new MusicPlayer()
 console.log("make a donot")
-let donut = new PixelMatrix({w:16, h:16})
-let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
+//let donut = new PixelMatrix({w:16, h:16})
+//let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
+let donut = new PixelFile("./images/mc/donut-32.bmp")
+let cherry = new PixelFile("./images/mc/cherry-16.bmp")
+let bubble = new PixelFile("./images/bubble.png")
 
 
 console.log("make a donot", donut)
@@ -77,11 +80,6 @@ class Balloon extends Turtle {
   
 let grid = new Grid()
 let ship = new Ship()
-
-let bubble = new PixelFile("./images/bubble.png")
-
-//let b1 = new Balloon()
-
   
 function drawTri(t, length) {
   t.push()
@@ -96,9 +94,15 @@ function drawTri(t, length) {
 function drawHexagon(t, length) {
   t.stamp(bubble)
   for (let i=1; i <= 6; i++) {
+    t.up()
     t.stamp(donut)
+    t.forward(50)
     t.stamp(cherry)
+    t.left(180)
+    t.forward(50)
+    t.left(180)
     t.forward(length)
+    t.down()
     t.left(60)   
   }
 }

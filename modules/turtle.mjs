@@ -309,6 +309,14 @@ export class Turtle {
     this.cc.stamp(this.mox(this.x), this.moy(this.y), image)
   }
 
+  up() {
+    this.penDown = false
+  }
+
+  down() {
+    this.penDown = true
+  }
+
   forward(length) {
     var x0 = this.x
     var  y0 = this.y
