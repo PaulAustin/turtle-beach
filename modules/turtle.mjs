@@ -19,9 +19,14 @@ console.log('Welcome To JS-Turtle-Graphics - PFA 0.1')
 // The controller might be created with the beach
 // It get key events, 
 export class Controller {
-  constructor() {}
+  constructor() {
+    this.player1 = null
+    this.player2 = null
+    this.p1kMap = {'w':'up','a':'left','s':'down','d':'right'}
+    this.p2kMap = {'i':'up','j':'left','k':'down','l':'right'}
+  }
 
-  sestPlayer1(sprite) {
+  setPlayer1(sprite) {
     this.player1 = sprite
   }
 
@@ -30,6 +35,25 @@ export class Controller {
   }
 
   onKey(event) {
+    let k = event .key
+    if (this.player1 !== null) {
+      let command = this.p1kMap[k]
+      if (command !== undefined) {
+        this.player1.onControl(command)
+      } 
+    } else if (this.player1 !== null) {
+      let command = this.p2kMap[k]
+      if (command !== undefined) {
+        this.player2.onControl(command)
+      } 
+    }
+
+    if (event.key === ' ') {
+      this.ticking = !this.ticking
+    } else if (event.key === 's') {
+      this.step = true
+    }
+
     // WASD, IJKL, Arrow keys, a, b, other???
   }
 }
@@ -37,6 +61,9 @@ export class Controller {
 
 export class Beach {
   constructor() {
+
+    // Set up a game controller to map and route key events.
+    this.controller = new Controller()
 
     // Turtle constructors connect to the beach
     // Could check to see is al ready ther, coudl allow for other beaches
@@ -72,6 +99,8 @@ export class Beach {
   keyDown(event) {
     //  var name = event.key;
     // var code = event.code;
+
+    this.controller.onKey(event)
     if (event.key === ' ') {
       this.ticking = !this.ticking
     } else if (event.key === 's') {
@@ -194,6 +223,18 @@ export class Turtle {
     gTurtles.push(this)
     this.cc = gTCC
     this.tics = 0
+  }
+
+  onControl (command) {
+    if (command === 'up') {
+      this.oy += 10
+    } else if (command === 'down') {
+      this.oy -= 10
+    } else if (command === 'left') {
+      this.ox -= 10
+    } else if (command === 'right') {
+      this.ox += 10      
+    }
   }
 
   draw() {

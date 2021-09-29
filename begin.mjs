@@ -7,27 +7,27 @@ import { PixelMatrix, PixelFile } from './modules/pixels.mjs'
 import { spriteColors } from './modules/pixels.mjs'
 import { sprite16 } from './images/sprites.mjs'
 
-var b = new Beach()
+var beach = new Beach()
 let music = new MusicPlayer()
 console.log("make a donot")
 //let donut = new PixelMatrix({w:16, h:16})
 //let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
 let donut = new PixelFile("./images/mc/donut-32.bmp")
 //let cherry = new PixelFile("./images/mc/cherry-16.bmp")
-let cherry = new PixelFile("./images/svg/cherry1.svg")
+let cherry = new PixelFile("./images/svg/cherry.svg")
 let bubble = new PixelFile("./images/bubble.png")
 
 
 console.log("make a donot", donut)
 
-b.onMouseDown = function(x, y) {
+beach.onMouseDown = function(x, y) {
   // console.log('mouse', x, y)
-  ship.setOrigin(x, y)
+  // ship.setOrigin(x, y)
   // music.playNote("C:1")
   // music.playNotes(['C:1', 'D:1', 'E:1', 'C:1', 'D:1', 'E:1'])
   //music.playNotes(['r4:2', 'g', 'g', 'g', 'eb:8', 'r:2', 'f', 'f', 'f', 'd:8'])
 
-  music.playNotes(prelude)
+  // music.playNotes(prelude)
   // a short hack
 }
 
@@ -78,9 +78,21 @@ class Balloon extends Turtle {
   timer(tic) {
   }
 }
-  
+ 
+class ImageSprite extends Turtle {
+  constructor(path) {
+    super()
+    this.stampImage = new PixelFile(path)
+  }
+  draw() {
+    this.stamp(this.stampImage, 1)
+  }
+}
+
 let grid = new Grid()
-let ship = new Ship()
+//let ship = new Ship()
+let moon = new ImageSprite("./images/svg/space/moon.svg")
+beach.controller.setPlayer1(moon)
   
 function drawTri(t, length) {
   t.push()
