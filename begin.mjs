@@ -14,7 +14,7 @@ console.log("make a donot")
 //let cherry = new PixelMatrix({w:16, h:16, data:sprite16.cherry})
 let donut = new PixelFile("./images/mc/donut-32.bmp")
 //let cherry = new PixelFile("./images/mc/cherry-16.bmp")
-let cherry = new PixelFile("./images/svg/cherry0.svg")
+let cherry = new PixelFile("./images/svg/cherry1.svg")
 let bubble = new PixelFile("./images/bubble.png")
 
 

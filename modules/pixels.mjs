@@ -55,13 +55,6 @@ export let spriteColors = [
 
 export class PixelImage {
   drawToContext(ctx, x, y, w, h) {
-
-  }
-  static loadFromFile(path) {
-    return new FileImage(path)
-  }
-  static load16ColorASCII(str) {
-    return new ArrayImage(32, 32)
   }
 }
 

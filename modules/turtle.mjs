@@ -16,6 +16,25 @@ var gTCC = {}
 console.log('\x1b[30m');
 console.log('Welcome To JS-Turtle-Graphics - PFA 0.1')
 
+// The controller might be created with the beach
+// It get key events, 
+export class Controller {
+  constructor() {}
+
+  sestPlayer1(sprite) {
+    this.player1 = sprite
+  }
+
+  setPlayer2(sprite) {
+    this.player2 = sprite
+  }
+
+  onKey(event) {
+    // WASD, IJKL, Arrow keys, a, b, other???
+  }
+}
+
+
 export class Beach {
   constructor() {
 
